@@ -1,18 +1,1871 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  title: RPC Tomochain
-  description: API description for RPC Tomochain.
-  version: 1.0.0
-host: api.example.com
+  version: '1.0.0'
+  title: Tomochain JSON-RPC
+  description: A collection holding all the Tomochain JSON​ RPC API calls
+  contact: {}
+host: rpc.tomochain.com
+basePath: /
 schemes:
-  - http
+- https
+consumes:
+- application/json
+produces:
+- application/json
 paths:
-  /users:
-    get:
-      summary: Returns a list of users.
-      description: Optional extended description in Markdown.
+  /clientVersion:
+    post:
+      description: >-
+
+
+        Returns the current client version.
+
+
+        **Parameters**
+
+
+
+        none
+
+
+
+        **Returns**
+
+
+
+        `String` - The current client version
+      tags:
+      - web3
+      operationId: clientRequest
+      deprecated: false
       produces:
-        - application/json
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/clientVersionRequest'
       responses:
         200:
-          description: OK
+          description: ''
+          headers: {}
+  /sha3:
+    post:
+      description: >-
+
+
+        Returns Keccak-256 (not the standardized SHA3-256) of the given data.
+
+
+
+        **Parameters**
+
+
+
+        `DATA` - the data to convert into a SHA3 hash
+
+
+
+        `params:` 
+        `[
+          "0x68656c6c6f20776f726c64"
+        ]`
+        
+
+
+
+        **Returns**
+
+
+
+        `DATA` - The SHA3 result of the given string.
+      tags:
+      - web3
+      operationId: sha3Request
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/sha3request'
+      responses:
+        200:
+          description: ''
+          headers: {} 
+  /version:
+    post:
+      description: >-
+
+      
+
+
+        Returns the current network id.
+
+
+
+        **Parameters**
+
+
+
+        none
+
+
+
+        **Returns**
+
+
+
+        `String` - The current network id.
+
+        `"88"`: Tomochain Mainnet
+
+        `"89"`: Tomochain Testnet 
+
+      tags:
+      - net
+      operationId: versionRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/versionrequest'
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /listening:
+    post:
+      description: >-
+
+
+        Returns `true` if client is actively listening for network connections.
+
+
+
+        **Parameters**
+
+
+
+        none
+
+
+
+        **Returns**
+
+
+
+        `Boolean` - `true` when listening, otherwise `false`.
+
+
+
+      tags:
+      - net
+      operationId: listeningRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/listeningrequest'
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /peerCount:
+    post:
+      description: >-
+        Returns number of peers currently connected to the client.
+
+ 
+        **Parameters**
+
+
+        none
+
+
+        **Returns**
+
+
+        `QUANTITY` - integer of the number of connected peers.
+      tags:
+      - net
+      operationId: peerCountRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/peerCountRequest'
+      responses:
+        200:
+          description: ''
+          headers: {}
+  /protocolVersion:
+    post:
+      description: >-
+        Returns the current ethereum protocol version.
+
+
+        **Parameters**
+
+
+        none
+
+
+        **Returns**
+
+
+        `String` - The current ethereum protocol version
+      tags:
+      - eth
+      operationId: protocolVersionRequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/protocolVersionRequest'
+      responses:
+        200:
+          description: ''
+          headers: {}
+definitions:
+  clientVersionRequest:
+    title: clientVersionRequest
+    example:
+      jsonrpc: 2.0
+      method: web3_clientVersion
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  sha3request:
+    title: sha3request
+    example:
+      jsonrpc: 2.0
+      method: web3_sha3
+      params:
+      - 0x68656c6c6f20776f726c64
+      id: 64
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  versionrequest:
+    title: versionrequest
+    example:
+      jsonrpc: 2.0
+      method: net_version
+      params: []
+      id: 67
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  listeningrequest:
+    title: listeningrequest
+    example:
+      jsonrpc: 2.0
+      method: net_listening
+      params: []
+      id: 67
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  peerCountRequest:
+    title: peerCountRequest
+    example:
+      jsonrpc: 2.0
+      method: net_peerCount
+      params: []
+      id: 74
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  protocolVersionRequest:
+    title: protocolVersionRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_protocolVersion
+      params: []
+      id: 67
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  syncingrequest:
+    title: syncingrequest
+    example:
+      jsonrpc: 2.0
+      method: eth_syncing
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  coinbaserequest:
+    title: coinbaserequest
+    example:
+      jsonrpc: 2.0
+      method: eth_coinbase
+      params: []
+      id: 64
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  miningrequest:
+    title: miningrequest
+    example:
+      jsonrpc: 2.0
+      method: eth_mining
+      params: []
+      id: 71
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  hashraterequest:
+    title: hashraterequest
+    example:
+      jsonrpc: 2.0
+      method: eth_hashrate
+      params: []
+      id: 71
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  gasPriceRequest:
+    title: gasPriceRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_gasPrice
+      params: []
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  accountsrequest:
+    title: accountsrequest
+    example:
+      jsonrpc: 2.0
+      method: eth_accounts
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  blockNumberRequest:
+    title: blockNumberRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_blockNumber
+      params: []
+      id: 83
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBalanceRequest:
+    title: getBalanceRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getBalance
+      params:
+      - 0x407d73d8a49eeb85d32cf465507dd71d507100c1
+      - latest
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getStorageAtRequest:
+    title: getStorageAtRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getStorageAt
+      params:
+      - 0x295a70b2de5e3953354a6a8344e616ed314d7251
+      - 0x0
+      - latest
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionCountRequest:
+    title: getTransactionCountRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getTransactionCount
+      params:
+      - 0x407d73d8a49eeb85d32cf465507dd71d507100c1
+      - latest
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockTransactionCountByHashRequest:
+    title: getBlockTransactionCountByHashRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getBlockTransactionCountByHash
+      params:
+      - 0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockTransactionCountByNumberRequest:
+    title: getBlockTransactionCountByNumberRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getBlockTransactionCountByNumber
+      params:
+      - 0x52A8CA
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getCodeRequest:
+    title: getCodeRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getCode
+      params:
+      - 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
+      - 0x2
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  signrequest:
+    title: signrequest
+    example:
+      jsonrpc: 2.0
+      method: eth_sign
+      params:
+      - 0x9b2055d370f73ec7d8a03e965129118dc8f5bf83
+      - 0xdeadbeaf
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  sendTransactionRequest:
+    title: sendTransactionRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_sendTransaction
+      params:
+      - from: 0xb60e8dd61c5d32be8058bb8eb970870f07233155
+        to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567
+        gas: 0x76c0
+        gasPrice: 0x9184e72a000
+        value: 0x9184e72a
+        data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  Param:
+    title: Param
+    example:
+      from: 0xb60e8dd61c5d32be8058bb8eb970870f07233155
+      to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567
+      gas: 0x76c0
+      gasPrice: 0x9184e72a000
+      value: 0x9184e72a
+      data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+    type: object
+    properties:
+      from:
+        type: string
+      to:
+        type: string
+      gas:
+        type: string
+      gasPrice:
+        type: string
+      value:
+        type: string
+      data:
+        type: string
+    required:
+    - from
+    - to
+    - gas
+    - gasPrice
+    - value
+    - data
+  sendRawTransactionRequest:
+    title: sendRawTransactionRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_sendRawTransaction
+      params:
+      - 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  callrequest:
+    title: callrequest
+    example:
+      jsonrpc: 2.0
+      method: eth_call
+      params:
+      - from: ''
+        to: ''
+        gas: ''
+        gasPrice: ''
+        value: ''
+        data: ''
+      - latest
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param1'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  Param1:
+    title: Param1
+    example:
+      from: ''
+      to: ''
+      gas: ''
+      gasPrice: ''
+      value: ''
+      data: ''
+    type: object
+    properties:
+      from:
+        type: string
+      to:
+        type: string
+      gas:
+        type: string
+      gasPrice:
+        type: string
+      value:
+        type: string
+      data:
+        type: string
+  estimateGasRequest:
+    title: estimateGasRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_estimateGas
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockByHashRequest:
+    title: getBlockByHashRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getBlockByHash
+      params:
+      - 0xad1328d13f833b8af722117afdc406a762033321df8e48c00cd372d462f48169
+      - true
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBlockByNumberRequest:
+    title: getBlockByNumberRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getBlockByNumber
+      params:
+      - 0x1b4
+      - true
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionByHashRequest:
+    title: getTransactionByHashRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getTransactionByHash
+      params:
+      - 0xb2fea9c4b24775af6990237aa90228e5e092c56bdaee74496992a53c208da1ee
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionByBlockHashAndIndexRequest:
+    title: getTransactionByBlockHashAndIndexRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getTransactionByBlockHashAndIndex
+      params:
+      - 0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7
+      - 0x0
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionByBlockNumberAndIndexRequest:
+    title: getTransactionByBlockNumberAndIndexRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getTransactionByBlockNumberAndIndex
+      params:
+      - 0x52A96E
+      - 0x1
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getTransactionReceiptRequest:
+    title: getTransactionReceiptRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getTransactionReceipt
+      params:
+      - 0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getUncleByBlockHashAndIndexRequest:
+    title: getUncleByBlockHashAndIndexRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getUncleByBlockHashAndIndex
+      params:
+      - 0x7cea0c9ae53df7073fcd4e7b19fc3f1905a2540bbdbd9a10796c9296f5af55dc
+      - 0x0
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getUncleByBlockNumberAndIndexRequest:
+    title: getUncleByBlockNumberAndIndexRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getUncleByBlockNumberAndIndex
+      params:
+      - 0x29c
+      - 0x0
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getCompilersRequest:
+    title: getCompilersRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getCompilers
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  compileLLLRequest:
+    title: compileLLLRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_compileLLL
+      params:
+      - (returnlll (suicide (caller)))
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  compileSolidityRequest:
+    title: compileSolidityRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_compileSolidity
+      params:
+      - contract test { function multiply(uint a) returns(uint d) {   return a * 7;   } }
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  compileSerpentRequest:
+    title: compileSerpentRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_compileSerpent
+      params:
+      - /* some serpent */
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  newFilterRequest:
+    title: newFilterRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_newFilter
+      params:
+      - topics:
+        - 0x12341234
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param2'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  Param2:
+    title: Param2
+    example:
+      topics:
+      - 0x12341234
+    type: object
+    properties:
+      topics:
+        type: array
+        items:
+          type: string
+    required:
+    - topics
+  newBlockFilterRequest:
+    title: newBlockFilterRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_newBlockFilter
+      params: []
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  newPendingTransactionFilterRequest:
+    title: newPendingTransactionFilterRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_newPendingTransactionFilter
+      params: []
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  uninstallFilterRequest:
+    title: uninstallFilterRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_uninstallFilter
+      params:
+      - 0xb
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getFilterChangesRequest:
+    title: getFilterChangesRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getFilterChanges
+      params:
+      - 0x16
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getLogsRequest:
+    title: getLogsRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getLogs
+      params:
+      - topics:
+        - 0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b
+      id: 74
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param2'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getWorkRequest:
+    title: getWorkRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_getWork
+      params: []
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  submitWorkRequest:
+    title: submitWorkRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_submitWork
+      params:
+      - 0x0000000000000001
+      - 0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+      - 0xD1GE5700000000000000000000000000D1GE5700000000000000000000000000
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  submitHashrateRequest:
+    title: submitHashrateRequest
+    example:
+      jsonrpc: 2.0
+      method: eth_submitHashrate
+      params:
+      - 0x0000000000000000000000000000000000000000000000000000000000500000
+      - 0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  putStringRequest:
+    title: putStringRequest
+    example:
+      jsonrpc: 2.0
+      method: db_putString
+      params:
+      - testDB
+      - myKey
+      - myString
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getStringRequest:
+    title: getStringRequest
+    example:
+      jsonrpc: 2.0
+      method: db_getString
+      params:
+      - testDB
+      - myKey
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  putHexRequest:
+    title: putHexRequest
+    example:
+      jsonrpc: 2.0
+      method: db_putHex
+      params:
+      - testDB
+      - myKey
+      - 0x68656c6c6f20776f726c64
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getHexRequest:
+    title: getHexRequest
+    example:
+      jsonrpc: 2.0
+      method: db_getHex
+      params:
+      - testDB
+      - myKey
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  postrequest:
+    title: postrequest
+    example:
+      jsonrpc: 2.0
+      method: shh_post
+      params:
+      - from: 0xc931d93e97ab07fe42d923478ba2465f2..
+        topics:
+        - 0x68656c6c6f20776f726c64
+        payload: 0x68656c6c6f20776f726c64
+        ttl: 100
+        priority: 100
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param4'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  Param4:
+    title: Param4
+    example:
+      from: 0xc931d93e97ab07fe42d923478ba2465f2..
+      topics:
+      - 0x68656c6c6f20776f726c64
+      payload: 0x68656c6c6f20776f726c64
+      ttl: 100
+      priority: 100
+    type: object
+    properties:
+      from:
+        type: string
+      topics:
+        type: array
+        items:
+          type: string
+      payload:
+        type: string
+      ttl:
+        type: integer
+        format: int32
+      priority:
+        type: integer
+        format: int32
+    required:
+    - from
+    - topics
+    - payload
+    - ttl
+    - priority
+  newIdentityRequest:
+    title: newIdentityRequest
+    example:
+      jsonrpc: 2.0
+      method: shh_newIdentity
+      params: []
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  hasIdentityRequest:
+    title: hasIdentityRequest
+    example:
+      jsonrpc: 2.0
+      method: shh_hasIdentity
+      params:
+      - 0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  newGroupRequest:
+    title: newGroupRequest
+    example:
+      jsonrpc: 2.0
+      method: shh_newGroup
+      params: []
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  addToGroupRequest:
+    title: addToGroupRequest
+    example:
+      jsonrpc: 2.0
+      method: shh_addToGroup
+      params:
+      - 0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  newFilterRequest1:
+    title: newFilterRequest1
+    example:
+      jsonrpc: 2.0
+      method: shh_newFilter
+      params:
+      - topics:
+        - 0x12341234bf4b564f
+        to: 0x2341234bf4b2341234bf4b564f...
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          $ref: '#/definitions/Param5'
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  Param5:
+    title: Param5
+    example:
+      topics:
+      - 0x12341234bf4b564f
+      to: 0x2341234bf4b2341234bf4b564f...
+    type: object
+    properties:
+      topics:
+        type: array
+        items:
+          type: string
+      to:
+        type: string
+    required:
+    - topics
+    - to
+  getMessagesRequest:
+    title: getMessagesRequest
+    example:
+      jsonrpc: 2.0
+      method: shh_getMessages
+      params:
+      - 0x7
+      id: 73
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+tags:
+- name: web3
+- name: net
+- name: eth
+- name: db
+- name: shh
