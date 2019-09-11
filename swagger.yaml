@@ -1,0 +1,18 @@
+swagger: "2.0"
+info:
+  title: RPC Tomochain
+  description: API description for RPC Tomochain.
+  version: 1.0.0
+host: api.example.com
+schemes:
+  - http
+paths:
+  /users:
+    get:
+      summary: Returns a list of users.
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
