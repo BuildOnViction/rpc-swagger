@@ -52,7 +52,7 @@ paths:
           $ref: '#/definitions/clientVersionRequest'
       responses:
         200:
-          description: ''
+          description: 'Successful operation'
           headers: {}
   /sha3:
     post:
@@ -102,7 +102,7 @@ paths:
           $ref: '#/definitions/sha3request'
       responses:
         200:
-          description: ''
+          description: 'Successful operation'
           headers: {} 
   /version:
     post:
@@ -151,7 +151,7 @@ paths:
           $ref: '#/definitions/versionrequest'
       responses:
         200:
-          description: ''
+          description: 'Successful operation'
           headers: {}
   /listening:
     post:
@@ -232,7 +232,7 @@ paths:
           $ref: '#/definitions/peerCountRequest'
       responses:
         200:
-          description: ''
+          description: 'Successful operation'
           headers: {}
   /protocolVersion:
     post:
@@ -268,7 +268,51 @@ paths:
           $ref: '#/definitions/protocolVersionRequest'
       responses:
         200:
-          description: ''
+          description: 'Successful operation'
+          headers: {}
+  /syncing:
+    post:
+      description: >-
+        
+        Returns an object with data about the sync status or false.
+
+
+        **Parameters**
+
+
+        none
+
+
+        **Returns**
+
+
+        `Object|Boolean`, An object with sync status data or FALSE, when not syncing:
+
+        * `startingBlock`: `QUANTITY` - The block at which the import started (will only be reset, after the sync reached his head) 
+        
+        * `currentBlock`: `QUANTITY` - The current block, same as eth_blockNumber 
+        
+        * `highestBlock`: `QUANTITY` - The estimated highest block
+
+      tags:
+      - eth
+      operationId: syncingrequest
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+      - name: Body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/syncingrequest'
+      responses:
+        200:
+          description: 'Successful operation'
           headers: {}
 definitions:
   clientVersionRequest:
@@ -1865,7 +1909,12 @@ definitions:
     - id
 tags:
 - name: web3
+  description: API for web3 request
 - name: net
+  description: API for network request
 - name: eth
+  description: API for eth information
 - name: db
+  description: API for DB information
 - name: shh
+  description: API for Shh
