@@ -714,6 +714,291 @@ paths:
           #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
         500:
           description: 'Internal Server Error'
+  /getBlockTransactionCountByHash:
+    post:
+      description: >-
+
+
+        
+        Returns the number of transactions in a block from a block matching the given block hash.
+
+
+        **Parameters**
+
+
+        `DATA`, 32 Bytes - hash of a block
+
+        ```
+
+
+        params: [
+          '0xc8b967161c671ce952a3d50987a78d64157fb5a8e1724804b87d3e9b11e3aa34'
+        ]
+
+
+        ```
+
+
+        **Returns**
+
+
+        `QUANTITY` - integer of the number of transactions in this block.
+
+
+      tags:
+        - eth
+      operationId: getBlockTransactionCountByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockTransactionCountByHashRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
+        500:
+          description: 'Internal Server Error'
+  /getBlockTransactionCountByNumber:
+    post:
+      description: >-
+
+
+        
+        Returns the number of transactions in a block matching the given block number.
+
+
+        **Parameters**
+
+
+        `QUANTITY|TAG` - integer of a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the default block parameter.
+
+
+        ```
+
+        params: [
+          '0x85', // 232
+        ]
+
+        ```
+
+        **Returns**
+
+
+        `QUANTITY` - integer of the number of transactions in this block.
+
+
+      tags:
+        - eth
+      operationId: getBlockTransactionCountByNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockTransactionCountByNumberRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
+        500:
+          description: 'Internal Server Error'
+  /getCode:
+    post:
+      description: >-
+
+
+        
+        Returns code at a given address.
+
+
+        **Parameters**
+
+
+        `DATA`, 20 Bytes - address
+
+
+        `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`, see the default block parameter
+
+
+        ```
+
+        params: [
+          '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+          '0x2'  // 2
+        ]
+
+        ```
+
+
+        **Returns**
+
+
+        `DATA` - the code from the given address.
+
+
+      tags:
+        - eth
+      operationId: getCode
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getCodeRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
+        500:
+          description: 'Internal Server Error'
+  /sign:
+    post:
+      description: >-
+
+
+        
+        The sign method calculates an Ethereum specific signature with: `sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
+
+        By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. 
+        This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
+
+
+        **Note:** the address to sign with must be unlocked.
+
+
+        **Parameters**
+
+
+        account, message
+
+
+        `DATA`, 20 Bytes - address
+
+
+        `DATA`, N Bytes - message to sign
+
+
+        **Returns**
+
+
+        `DATA`: Signature
+
+
+      tags:
+        - eth
+      operationId: sign
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/signrequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
+  /sendTransaction:
+    post:
+      description: >-
+
+        
+        Creates new message call transaction or a contract creation, if the data field contains code.
+
+
+        **Parameters**
+
+
+        `Object` - The transaction object
+
+
+        `from`: `DATA`, 20 Bytes - The address the transaction is send from.
+
+
+        `to`: `DATA`, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.
+
+
+        `gas`: `QUANTITY` - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
+
+
+        `gasPrice`: `QUANTITY` - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
+
+
+        `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
+
+
+        `data`: `DATA` - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see Ethereum Contract ABI
+
+
+        `nonce`: `QUANTITY` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+
+
+        ```
+
+        params: [{
+          "from": " 0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+          "to": " 0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+          "gas": "0x76c0", // 30400
+          "gasPrice": "0x9184e72a000", // 10000000000000
+          "value": "0x9184e72a", // 2441406250
+          "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+        }]
+
+        ```
+
+        **Returns**
+
+        `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
+
+        Use `eth_getTransactionReceipt` to get the contract address, after the transaction was mined, when you created a contract.
+
+
+      tags:
+        - eth
+      operationId: sendTransaction
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/sendTransactionRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+        500:
+          description: 'Internal Server Error'
 definitions:
   clientVersionRequest:
     title: clientVersionRequest
@@ -1102,9 +1387,9 @@ definitions:
     title: getBlockTransactionCountByHashRequest
     example:
       jsonrpc: '2.0'
-      method: eth_getBlockTransactionCountByHash
+      method: 'eth_getBlockTransactionCountByHash'
       params:
-      - 0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238
+      - '0xc8b967161c671ce952a3d50987a78d64157fb5a8e1724804b87d3e9b11e3aa34'
       id: 1
     type: object
     properties:
@@ -1128,9 +1413,9 @@ definitions:
     title: getBlockTransactionCountByNumberRequest
     example:
       jsonrpc: '2.0'
-      method: eth_getBlockTransactionCountByNumber
+      method: 'eth_getBlockTransactionCountByNumber'
       params:
-      - 0x52A8CA
+      - '0x52A8CA'
       id: 1
     type: object
     properties:
@@ -1154,10 +1439,10 @@ definitions:
     title: getCodeRequest
     example:
       jsonrpc: '2.0'
-      method: eth_getCode
+      method: 'eth_getCode'
       params:
-      - 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
-      - 0x2
+      - '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+      - '0x2'
       id: 1
     type: object
     properties:
@@ -1181,10 +1466,10 @@ definitions:
     title: signrequest
     example:
       jsonrpc: '2.0'
-      method: eth_sign
+      method: 'eth_sign'
       params:
-      - 0x9b2055d370f73ec7d8a03e965129118dc8f5bf83
-      - 0xdeadbeaf
+      - '0x9b2055d370f73ec7d8a03e965129118dc8f5bf83'
+      - '0xdeadbeaf'
       id: 1
     type: object
     properties:
@@ -1208,14 +1493,14 @@ definitions:
     title: sendTransactionRequest
     example:
       jsonrpc: '2.0'
-      method: eth_sendTransaction
+      method: 'eth_sendTransaction'
       params:
-      - from: 0xb60e8dd61c5d32be8058bb8eb970870f07233155
-        to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567
-        gas: 0x76c0
-        gasPrice: 0x9184e72a000
-        value: 0x9184e72a
-        data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+      - from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155'
+        to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+        gas: '0x76c0'
+        gasPrice: '0x9184e72a000'
+        value: '0x9184e72a'
+        data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
       id: 1
     type: object
     properties:
