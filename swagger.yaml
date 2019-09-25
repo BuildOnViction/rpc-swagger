@@ -34,6 +34,9 @@ paths:
 
 
         `String` - The current client version
+
+
+
       tags:
       - web3
       operationId: clientRequest
@@ -41,10 +44,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
       - name: Body
         in: body
         required: true
@@ -52,8 +51,15 @@ paths:
           $ref: '#/definitions/clientVersionRequest'
       responses:
         200:
-          description: 'Successful operation'
-          headers: {}
+          description: 'Successful Operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: 'tomo/tomochain05/v1.5.1-stable/linux-amd64/go1.10.8'
+        500:
+          description: 'Internal Server Error'
   /sha3:
     post:
       description: >-
@@ -71,11 +77,11 @@ paths:
 
 
 
-        `params:` 
+        `params:`
         `[
           "0x68656c6c6f20776f726c64"
         ]`
-        
+
 
 
 
@@ -91,10 +97,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
       - name: Body
         in: body
         required: true
@@ -102,13 +104,20 @@ paths:
           $ref: '#/definitions/sha3request'
       responses:
         200:
-          description: 'Successful operation'
-          headers: {} 
+          description: 'Successful Operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 64
+          #     result: '0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad'
+        500:
+          description: 'Internal Server Error'
   /version:
     post:
       description: >-
 
-      
+
 
 
         Returns the current network id.
@@ -131,7 +140,7 @@ paths:
 
         `"88"`: Tomochain Mainnet
 
-        `"89"`: Tomochain Testnet 
+        `"89"`: Tomochain Testnet
 
       tags:
       - net
@@ -140,10 +149,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
       - name: Body
         in: body
         required: true
@@ -152,7 +157,14 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          headers: {}
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 67
+          #     result: '88'
+        500:
+          description: 'Internal Server Error'
   /listening:
     post:
       description: >-
@@ -185,10 +197,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
       - name: Body
         in: body
         required: true
@@ -196,14 +204,24 @@ paths:
           $ref: '#/definitions/listeningrequest'
       responses:
         200:
-          description: ''
-          headers: {}
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: "2.0"
+          #     method: "net_listening"
+          #     id: 67
+          #     result: true
+        500:
+          description: 'Internal Server Error'
   /peerCount:
     post:
       description: >-
+
+
         Returns number of peers currently connected to the client.
 
- 
+
         **Parameters**
 
 
@@ -214,6 +232,8 @@ paths:
 
 
         `QUANTITY` - integer of the number of connected peers.
+
+
       tags:
       - net
       operationId: peerCountRequest
@@ -221,10 +241,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
       - name: Body
         in: body
         required: true
@@ -233,7 +249,15 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          headers: {}
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     method: 'net_peerCount'
+          #     id: 74
+          #     result: '0x75'
+        500:
+          description: 'Internal Server Error'
   /protocolVersion:
     post:
       description: >-
@@ -257,10 +281,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
       - name: Body
         in: body
         required: true
@@ -269,11 +289,18 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          headers: {}
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x3f'
+        500:
+          description: 'Internal Server Error'
   /syncing:
     post:
       description: >-
-        
+
         Returns an object with data about the sync status or false.
 
 
@@ -288,11 +315,12 @@ paths:
 
         `Object|Boolean`, An object with sync status data or FALSE, when not syncing:
 
-        * `startingBlock`: `QUANTITY` - The block at which the import started (will only be reset, after the sync reached his head) 
-        
-        * `currentBlock`: `QUANTITY` - The current block, same as eth_blockNumber 
-        
+        * `startingBlock`: `QUANTITY` - The block at which the import started (will only be reset, after the sync reached his head)
+
+        * `currentBlock`: `QUANTITY` - The current block, same as eth_blockNumber
+
         * `highestBlock`: `QUANTITY` - The estimated highest block
+
 
       tags:
       - eth
@@ -301,10 +329,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Content-Type
-        in: header
-        required: true
-        type: string
       - name: Body
         in: body
         required: true
@@ -313,13 +337,389 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          headers: {}
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: 'false'
+        500:
+          description: 'Internal Server Error'
+  /coinbase:
+    post:
+      description: >-
+
+        Returns the client coinbase address.
+
+        **Parameters**
+
+        none
+
+        **Returns**
+
+        `DATA`, 20 bytes - the current coinbase address.
+
+      tags:
+        - eth
+      operationId: coinbase
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/coinbaserequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 64
+          #     result: '0xad670b2b166684657ffff95f4810380ae7381e9b'
+        500:
+          description: 'Internal Server Error'
+  /hashrate:
+    post:
+      description: >-
+
+        Returns the number of hashes per second that the node is mining with.
+
+        **Parameters**
+
+        none
+
+        **Returns**
+
+        `QUANTITY` - number of hashes per second.
+
+      tags:
+        - eth
+      operationId: hashrate
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/hashraterequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 71
+          #     result: '0x0'
+        500:
+          description: 'Internal Server Error'
+  /gasPrice:
+    post:
+      description: >-
+
+        Returns the current price per gas in wei.
+
+        **Parameters**
+
+        none
+
+        **Returns**
+
+        `QUANTITY` - integer of the current gas price in wei.
+
+      tags:
+        - eth
+      operationId: gasPrice
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/gasPriceRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 73
+          #     result: '0xee6b280'
+        500:
+          description: 'Internal Server Error'
+  /accounts:
+    post:
+      description: >-
+
+        Returns a list of addresses owned by client.
+
+        **Parameters**
+
+        none
+
+        **Returns**
+
+        `Array of DATA`, 20 Bytes - addresses owned by the client
+
+      tags:
+        - eth
+      operationId: accounts
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/accountsrequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x1b82c4bf317fcafe3d77e8b444c82715d216afe8'
+        500:
+          description: 'Internal Server Error'
+  /blockNumber:
+    post:
+      description: >-
+
+        Returns the number of most recent block.
+
+        **Parameters**
+
+        none
+
+        **Returns**
+
+        `QUANTITY` - integer of the current block number the client is on.
+
+      tags:
+        - eth
+      operationId: blockNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/blockNumberRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 83
+          #     result: '0xa62efa'
+        500:
+          description: 'Internal Server Error'
+  /getBalance:
+    post:
+      description: >-
+
+
+        Returns the balance of the account of given address.
+
+
+        **Parameters**
+
+
+        `DATA`, 20 Bytes - address to check for balance.
+
+        `QUANTITY|TAG` - integer block number, or the string "latest", "earliest" or "pending", see the default block parameter
+
+
+        ```
+        params: [
+           ' 0x2b5634c42055806a59e9107ed44d43c426e58258',
+           'latest'
+        ]
+        ```
+
+
+        **Returns**
+
+        `QUANTITY` - integer of the current balance in wei.
+
+      tags:
+        - eth
+      operationId: getBalance
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBalanceRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x30897f6e71126d858861'
+        500:
+          description: 'Internal Server Error'
+  /getStorageAt:
+    post:
+      description: >-
+
+
+        Returns the balance of the account of given address.
+
+
+
+        **Parameters**
+
+
+        `DATA`, 20 Bytes - address to check for balance.
+
+
+
+        `QUANTITY|TAG` - integer block number, or the string "latest", "earliest" or "pending", see the default block parameter
+
+
+
+        ```
+
+
+        params: [
+              '0x2b5634c42055806a59e9107ed44d43c426e58258',
+              'latest'
+              ]
+        
+        
+        ```
+
+        **Returns**
+
+
+
+        `QUANTITY` - integer of the current balance in wei.
+
+
+
+      tags:
+        - eth
+      operationId: getStorageAt
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getStorageAtRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionCount:
+    post:
+      description: >-
+
+
+        
+          Returns the number of transactions sent from an address.
+
+
+
+          **Parameters**
+
+
+
+          `DATA`, 20 Bytes - address.
+
+          `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`, see the default block parameter
+
+
+
+          ```
+
+
+          params: [
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+            'latest' // state at the latest block
+          ]
+
+
+          ```
+
+
+
+          **Returns**
+
+
+
+          `QUANTITY` - integer of the number of transactions send from this address.
+
+
+      tags:
+        - eth
+      operationId: getTransactionCount
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionCountRequest'
+      responses:
+        200:
+          description: 'Successful operation'
+          # schema:
+          #   type: object
+          #   properties:
+          #     jsonrpc: '2.0'
+          #     id: 1
+          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
+        500:
+          description: 'Internal Server Error'
 definitions:
   clientVersionRequest:
     title: clientVersionRequest
     example:
-      jsonrpc: 2.0
-      method: web3_clientVersion
+      jsonrpc: '2.0'
+      method: 'web3_clientVersion'
       params: []
       id: 1
     type: object
@@ -343,10 +743,10 @@ definitions:
   sha3request:
     title: sha3request
     example:
-      jsonrpc: 2.0
-      method: web3_sha3
+      jsonrpc: '2.0'
+      method: 'web3_sha3'
       params:
-      - 0x68656c6c6f20776f726c64
+      - '0x68656c6c6f20776f726c64'
       id: 64
     type: object
     properties:
@@ -369,8 +769,8 @@ definitions:
   versionrequest:
     title: versionrequest
     example:
-      jsonrpc: 2.0
-      method: net_version
+      jsonrpc: '2.0'
+      method: 'net_version'
       params: []
       id: 67
     type: object
@@ -394,8 +794,8 @@ definitions:
   listeningrequest:
     title: listeningrequest
     example:
-      jsonrpc: 2.0
-      method: net_listening
+      jsonrpc: '2.0'
+      method: 'net_listening'
       params: []
       id: 67
     type: object
@@ -419,8 +819,8 @@ definitions:
   peerCountRequest:
     title: peerCountRequest
     example:
-      jsonrpc: 2.0
-      method: net_peerCount
+      jsonrpc: '2.0'
+      method: 'net_peerCount'
       params: []
       id: 74
     type: object
@@ -444,8 +844,8 @@ definitions:
   protocolVersionRequest:
     title: protocolVersionRequest
     example:
-      jsonrpc: 2.0
-      method: eth_protocolVersion
+      jsonrpc: '2.0'
+      method: 'eth_protocolVersion'
       params: []
       id: 67
     type: object
@@ -469,8 +869,8 @@ definitions:
   syncingrequest:
     title: syncingrequest
     example:
-      jsonrpc: 2.0
-      method: eth_syncing
+      jsonrpc: '2.0'
+      method: 'eth_syncing'
       params: []
       id: 1
     type: object
@@ -494,35 +894,10 @@ definitions:
   coinbaserequest:
     title: coinbaserequest
     example:
-      jsonrpc: 2.0
-      method: eth_coinbase
+      jsonrpc: '2.0'
+      method: 'eth_coinbase'
       params: []
       id: 64
-    type: object
-    properties:
-      jsonrpc:
-        type: string
-      method:
-        type: string
-      params:
-        type: array
-        items:
-          type: string
-      id:
-        type: integer
-        format: int32
-    required:
-    - jsonrpc
-    - method
-    - params
-    - id
-  miningrequest:
-    title: miningrequest
-    example:
-      jsonrpc: 2.0
-      method: eth_mining
-      params: []
-      id: 71
     type: object
     properties:
       jsonrpc:
@@ -544,8 +919,8 @@ definitions:
   hashraterequest:
     title: hashraterequest
     example:
-      jsonrpc: 2.0
-      method: eth_hashrate
+      jsonrpc: '2.0'
+      method: 'eth_hashrate'
       params: []
       id: 71
     type: object
@@ -569,8 +944,8 @@ definitions:
   gasPriceRequest:
     title: gasPriceRequest
     example:
-      jsonrpc: 2.0
-      method: eth_gasPrice
+      jsonrpc: '2.0'
+      method: 'eth_gasPrice'
       params: []
       id: 73
     type: object
@@ -594,8 +969,8 @@ definitions:
   accountsrequest:
     title: accountsrequest
     example:
-      jsonrpc: 2.0
-      method: eth_accounts
+      jsonrpc: '2.0'
+      method: 'eth_accounts'
       params: []
       id: 1
     type: object
@@ -619,8 +994,8 @@ definitions:
   blockNumberRequest:
     title: blockNumberRequest
     example:
-      jsonrpc: 2.0
-      method: eth_blockNumber
+      jsonrpc: '2.0'
+      method: 'eth_blockNumber'
       params: []
       id: 83
     type: object
@@ -644,11 +1019,11 @@ definitions:
   getBalanceRequest:
     title: getBalanceRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getBalance
+      jsonrpc: '2.0'
+      method: 'eth_getBalance'
       params:
-      - 0x407d73d8a49eeb85d32cf465507dd71d507100c1
-      - latest
+      - '0x2b5634c42055806a59e9107ed44d43c426e58258'
+      - 'latest'
       id: 1
     type: object
     properties:
@@ -671,12 +1046,12 @@ definitions:
   getStorageAtRequest:
     title: getStorageAtRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getStorageAt
+      jsonrpc: '2.0'
+      method: 'eth_getStorageAt'
       params:
-      - 0x295a70b2de5e3953354a6a8344e616ed314d7251
-      - 0x0
-      - latest
+      - '0x295a70b2de5e3953354a6a8344e616ed314d7251'
+      - '0x0'
+      - 'latest'
       id: 1
     type: object
     properties:
@@ -699,11 +1074,11 @@ definitions:
   getTransactionCountRequest:
     title: getTransactionCountRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getTransactionCount
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionCount'
       params:
-      - 0x407d73d8a49eeb85d32cf465507dd71d507100c1
-      - latest
+      - '0xbf1dcb735e512b731abd3404c15df6431bd03d42'
+      - 'latest'
       id: 1
     type: object
     properties:
@@ -726,7 +1101,7 @@ definitions:
   getBlockTransactionCountByHashRequest:
     title: getBlockTransactionCountByHashRequest
     example:
-      jsonrpc: 2.0
+      jsonrpc: '2.0'
       method: eth_getBlockTransactionCountByHash
       params:
       - 0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238
@@ -752,7 +1127,7 @@ definitions:
   getBlockTransactionCountByNumberRequest:
     title: getBlockTransactionCountByNumberRequest
     example:
-      jsonrpc: 2.0
+      jsonrpc: '2.0'
       method: eth_getBlockTransactionCountByNumber
       params:
       - 0x52A8CA
@@ -778,7 +1153,7 @@ definitions:
   getCodeRequest:
     title: getCodeRequest
     example:
-      jsonrpc: 2.0
+      jsonrpc: '2.0'
       method: eth_getCode
       params:
       - 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
@@ -805,7 +1180,7 @@ definitions:
   signrequest:
     title: signrequest
     example:
-      jsonrpc: 2.0
+      jsonrpc: '2.0'
       method: eth_sign
       params:
       - 0x9b2055d370f73ec7d8a03e965129118dc8f5bf83
@@ -832,7 +1207,7 @@ definitions:
   sendTransactionRequest:
     title: sendTransactionRequest
     example:
-      jsonrpc: 2.0
+      jsonrpc: '2.0'
       method: eth_sendTransaction
       params:
       - from: 0xb60e8dd61c5d32be8058bb8eb970870f07233155
