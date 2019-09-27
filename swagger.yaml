@@ -156,7 +156,7 @@ paths:
           $ref: '#/definitions/versionrequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -204,7 +204,7 @@ paths:
           $ref: '#/definitions/listeningrequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -248,7 +248,7 @@ paths:
           $ref: '#/definitions/peerCountRequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -288,7 +288,7 @@ paths:
           $ref: '#/definitions/protocolVersionRequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -336,7 +336,7 @@ paths:
           $ref: '#/definitions/syncingrequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -642,7 +642,7 @@ paths:
             $ref: '#/definitions/getStorageAtRequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -705,7 +705,7 @@ paths:
             $ref: '#/definitions/getTransactionCountRequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -759,7 +759,7 @@ paths:
             $ref: '#/definitions/getBlockTransactionCountByHashRequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -811,7 +811,7 @@ paths:
             $ref: '#/definitions/getBlockTransactionCountByNumberRequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
           # schema:
           #   type: object
           #   properties:
@@ -924,7 +924,7 @@ paths:
             $ref: '#/definitions/signrequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
         500:
           description: 'Internal Server Error'
   /sendTransaction:
@@ -996,9 +996,680 @@ paths:
             $ref: '#/definitions/sendTransactionRequest'
       responses:
         200:
-          description: 'Successful operation'
+          description: 'Successful Operation'
         500:
           description: 'Internal Server Error'
+  /sendRawTransaction:
+    post:
+      description: >-
+
+        
+          Creates new message call transaction or a contract creation for signed transactions.
+
+
+          **Parameters**
+
+
+          `DATA`, The signed transaction data.
+
+
+          ```
+
+          params: ["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"]
+
+          ```
+
+          **Returns**
+
+
+          `DATA`, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
+
+           Use `eth_getTransactionReceipt` to get the contract address, after the transaction was mined, when you created a contract.
+
+
+      tags:
+        - eth
+      operationId: sendRawTransaction
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/sendRawTransactionRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /call:
+    post:
+      description: >-
+
+        
+        Executes a new message call immediately without creating a transaction on the block chain.
+
+
+
+        **Parameters**
+
+
+
+        `Object` [required]- The transaction call object
+
+        `from`: `DATA`, 20 Bytes - (optional) The address the transaction is sent from.
+
+        `to`: `DATA`, 20 Bytes - The address the transaction is directed to.
+
+        `gas`: `QUANTITY` - (optional) Integer of the gas provided for the transaction execution. eth_call consumes zero gas, but this parameter may be needed by some executions.
+
+        `gasPrice`: `QUANTITY` - (optional) Integer of the gasPrice used for each paid gas
+
+        `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
+
+        `data`: `DATA` - (optional) Hash of the method signature and encoded parameters. For details see Ethereum Contract ABI
+
+        `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`, see the default block parameter
+
+
+
+
+        **Returns**
+
+        `DATA` - the return value of executed contract.
+
+
+      tags:
+        - eth
+      operationId: call
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/callrequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /estimateGas:
+    post:
+      description: >-
+
+        
+        Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. 
+        The transaction will not be added to the blockchain. Note that the estimate may be significantly more 
+        than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
+
+
+
+        **Parameters**
+
+        See `eth_call` parameters, expect that all properties are optional. If no gas limit is specified geth uses 
+        the block gas limit from the pending block as an upper bound. As a result the returned estimate might not be 
+        enough to executed the call/transaction when the amount of gas is higher than the pending block gas limit.
+
+
+
+        **Returns**
+
+        `QUANTITY` - the amount of gas used.
+
+
+      tags:
+        - eth
+      operationId: estimateGas
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/estimateGasRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockByHash:
+    post:
+      description: >-
+
+        
+          Returns information about a block by hash.
+
+
+
+          **Parameters**
+
+
+          `BLOCKHASH` [required] - a string representing a BLOCKHASH
+
+          `Boolean` [required] - If true it returns the full transaction objects, if false only the hashes of the transactions.
+
+          ```
+
+          params: [
+            '0x9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624',
+            true
+          ]
+
+          ```
+
+
+          **Returns**
+
+          `Object` - A block object, or null when no block was found:
+
+          `number`: `QUANTITY` - the block number. null when its pending block.
+
+          `hash`: `DATA`, 32 Bytes - hash of the block. `null` when its pending block.
+
+          `parentHash`: `DATA`, 32 Bytes - hash of the parent block.
+
+          `nonce`: `DATA`, 8 Bytes - hash of the generated proof-of-work. `null` when its pending block.
+
+          `sha3Uncles`: `DATA`, 32 Bytes - SHA3 of the uncles data in the block.
+
+          `logsBloom`: `DATA`, 256 Bytes - the bloom filter for the logs of the block. `null` when its pending block.
+
+          `transactionsRoot`: `DATA`, 32 Bytes - the root of the transaction trie of the block.
+
+          `stateRoot`: `DATA`, 32 Bytes - the root of the final state trie of the block.
+
+          `receiptsRoot`: `DATA`, 32 Bytes - the root of the receipts trie of the block.
+
+          `miner`: `DATA`, 20 Bytes - the address of the beneficiary to whom the mining rewards were given.
+
+          `difficulty`: `QUANTITY` - integer of the difficulty for this block.
+
+          `totalDifficulty`: `QUANTITY` - integer of the total difficulty of the chain until this block.
+
+          `extraData`: `DATA` - the "extra data" field of this block.
+
+          `size`: `QUANTITY` - integer the size of this block in bytes.
+
+          `gasLimit`: `QUANTITY` - the maximum gas allowed in this block.
+
+          `gasUsed`: `QUANTITY` - the total used gas by all transactions in this block.
+
+          `timestamp`: `QUANTITY` - the unix timestamp for when the block was collated.
+
+          `transactions`: `Array` - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
+
+          `uncles`: `Array` - Array of uncle hashes.
+
+
+      tags:
+        - eth
+      operationId: getBlockByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockByHashRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBlockByNumber:
+    post:
+      description: >-
+
+        
+          Returns information about a block by block number.
+
+
+
+          **Parameters**
+
+
+          `BLOCKNUMBER` [required] - a hex code of an integer representing the BLOCKNUMBER or one of the following special params:
+            
+            - `latest`: get block data of the latest block
+
+            - `pending`: get block data of pending block
+
+            - `earliest`: get the genesis block
+
+          `FULLTX` [required] - a boolean value specified whether you want to get transactions list or not
+
+
+          ```
+
+          params: [
+            '0x0',
+            true
+          ]
+
+          ```
+
+
+
+          **Returns**
+
+
+          `RETURN VALUE` - block data of the given `BLOCKNUMBER`
+
+          
+          See `eth_getBlockByHash`
+
+
+      tags:
+        - eth
+      operationId: getBlockByNumber
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBlockByNumberRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionByHash:
+    post:
+      description: >-
+
+        
+        Returns the information about a transaction requested by transaction hash.
+
+
+        **Parameters**
+
+
+        `DATA`, 32 Bytes - hash of a transaction
+
+        ```
+
+        params: [
+          "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"
+        ]
+
+        ```
+
+        **Returns**
+
+
+        `Object` - A transaction object, or null when no transaction was found:
+
+        `hash`: `DATA`, 32 Bytes - hash of the transaction.
+
+        `nonce`: `QUANTITY` - the number of transactions made by the sender prior to this one.
+
+        `blockHash`: `DATA`, 32 Bytes - hash of the block where this transaction was in. `null` when its pending.
+
+        `blockNumber`: `QUANTITY` - block number where this transaction was in. `null` when its pending.
+
+        `transactionIndex`: `QUANTITY` - integer of the transactions index position in the block. `null` when its pending.
+
+        `from`: `DATA`, 20 Bytes - address of the sender.
+
+        `to`: `DATA`, 20 Bytes - address of the receiver. `null` when its a contract creation transaction.
+
+        `value`: `QUANTITY` - value transferred in Wei.
+
+        `gasPrice`: `QUANTITY` - gas price provided by the sender in Wei.
+
+        `gas`: `QUANTITY` - gas provided by the sender.
+
+        `input`: `DATA` - the data send along with the transaction.
+
+
+      tags:
+        - eth
+      operationId: getTransactionByHash
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionByHashRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionByBlockHashAndIndex:
+    post:
+      description: >-
+
+        
+        Returns information about a transaction by block hash and transaction index position.
+
+        **Parameters**
+
+
+        `DATA`, 32 Bytes - hash of a block.
+
+        `QUANTITY` - integer of the transaction index position.
+
+        ```
+
+        params: [
+          '0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7',
+          '0x0' // 0
+        ]
+
+        ```
+
+        **Returns**
+
+        See `eth_getTransactionByHash`
+
+
+      tags:
+        - eth
+      operationId: getTransactionByBlockHashAndIndex
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionByBlockHashAndIndexRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionByBlockNumberAndIndex:
+    post:
+      description: >-
+
+        
+          Returns information about a transaction by block number and transaction index position.
+
+
+          **Parameters**
+
+
+          `QUANTITY|TAG` - a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the default block parameter.
+
+          `QUANTITY` - the transaction index position.
+
+          ```
+
+          params: [
+            '0x29c', // 668
+            '0x0' // 0
+          ]
+
+          ```
+
+
+          **Returns**
+
+
+          See `eth_getTransactionByHash`
+
+
+      tags:
+        - eth
+      operationId: getTransactionByBlockNumberAndIndex
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionByBlockNumberAndIndexRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionReceipt:
+    post:
+      description: >-
+
+        
+        Returns the receipt of a transaction by transaction hash.
+
+
+        **Note:** That the receipt is not available for pending transactions.
+
+
+        **Parameters**
+
+
+        `DATA`, 32 Bytes - hash of a transaction
+
+
+          ```
+
+          params: [
+            '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
+          ]
+
+          ```
+
+        **Returns**
+
+
+          `Object` - A transaction receipt object, or `null` when no receipt was found:
+
+          `transactionHash`: `DATA`, 32 Bytes - hash of the transaction.
+
+          `transactionIndex`: `QUANTITY` - integer of the transactions index position in the block.
+
+          `blockHash`: `DATA`, 32 Bytes - hash of the block where this transaction was in.
+
+          `blockNumber`: `QUANTITY` - block number where this transaction was in.
+
+          `cumulativeGasUsed`: `QUANTITY` - The total amount of gas used when this transaction was executed in the block.
+
+          `gasUsed`: `QUANTITY` - The amount of gas used by this specific transaction alone.
+
+          `contractAddress`: `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
+
+          `logs`: `Array` - Array of log objects, which this transaction generated.
+
+          `logsBloom`: `DATA`, 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.
+
+
+        It also returns either :
+
+
+          `root` : `DATA` 32 bytes of post-transaction stateroot (pre Byzantium)
+
+          `status`: `QUANTITY` either `1` (success) or `0` (failure)
+
+
+
+      tags:
+        - eth
+      operationId: getTransactionReceipt
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionReceiptRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionReceipt:
+    post:
+      description: >-
+
+        
+        Returns the receipt of a transaction by transaction hash.
+
+
+        **Note:** That the receipt is not available for pending transactions.
+
+
+        **Parameters**
+
+
+        `DATA`, 32 Bytes - hash of a transaction
+
+
+          ```
+
+          params: [
+            '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
+          ]
+
+          ```
+
+        **Returns**
+
+
+          `Object` - A transaction receipt object, or `null` when no receipt was found:
+
+          `transactionHash`: `DATA`, 32 Bytes - hash of the transaction.
+
+          `transactionIndex`: `QUANTITY` - integer of the transactions index position in the block.
+
+          `blockHash`: `DATA`, 32 Bytes - hash of the block where this transaction was in.
+
+          `blockNumber`: `QUANTITY` - block number where this transaction was in.
+
+          `cumulativeGasUsed`: `QUANTITY` - The total amount of gas used when this transaction was executed in the block.
+
+          `gasUsed`: `QUANTITY` - The amount of gas used by this specific transaction alone.
+
+          `contractAddress`: `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
+
+          `logs`: `Array` - Array of log objects, which this transaction generated.
+
+          `logsBloom`: `DATA`, 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.
+
+
+        It also returns either :
+
+
+          `root` : `DATA` 32 bytes of post-transaction stateroot (pre Byzantium)
+
+          `status`: `QUANTITY` either `1` (success) or `0` (failure)
+          
+
+
+      tags:
+        - eth
+      operationId: getTransactionReceipt
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionReceiptRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getTransactionReceipt:
+    post:
+      description: >-
+
+        
+        Returns the receipt of a transaction by transaction hash.
+
+
+        **Note:** That the receipt is not available for pending transactions.
+
+
+        **Parameters**
+
+
+        `DATA`, 32 Bytes - hash of a transaction
+
+
+          ```
+
+          params: [
+            '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
+          ]
+
+          ```
+
+        **Returns**
+
+
+          `Object` - A transaction receipt object, or `null` when no receipt was found:
+
+          `transactionHash`: `DATA`, 32 Bytes - hash of the transaction.
+
+          `transactionIndex`: `QUANTITY` - integer of the transactions index position in the block.
+
+          `blockHash`: `DATA`, 32 Bytes - hash of the block where this transaction was in.
+
+          `blockNumber`: `QUANTITY` - block number where this transaction was in.
+
+          `cumulativeGasUsed`: `QUANTITY` - The total amount of gas used when this transaction was executed in the block.
+
+          `gasUsed`: `QUANTITY` - The amount of gas used by this specific transaction alone.
+
+          `contractAddress`: `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
+
+          `logs`: `Array` - Array of log objects, which this transaction generated.
+
+          `logsBloom`: `DATA`, 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.
+
+
+        It also returns either :
+
+
+          `root` : `DATA` 32 bytes of post-transaction stateroot (pre Byzantium)
+
+          `status`: `QUANTITY` either `1` (success) or `0` (failure)
+          
+
+
+      tags:
+        - eth
+      operationId: getTransactionReceipt
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getTransactionReceiptRequest'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+
 definitions:
   clientVersionRequest:
     title: clientVersionRequest
@@ -1553,10 +2224,10 @@ definitions:
   sendRawTransactionRequest:
     title: sendRawTransactionRequest
     example:
-      jsonrpc: 2.0
-      method: eth_sendRawTransaction
+      jsonrpc: '2.0'
+      method: 'eth_sendRawTransaction'
       params:
-      - 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+      - '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
       id: 1
     type: object
     properties:
@@ -1579,15 +2250,15 @@ definitions:
   callrequest:
     title: callrequest
     example:
-      jsonrpc: 2.0
-      method: eth_call
+      jsonrpc: '2.0'
+      method: 'eth_call'
       params:
-      - from: ''
-        to: ''
-        gas: ''
-        gasPrice: ''
-        value: ''
-        data: ''
+      - from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155'
+        to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+        gas: '0x76c0'
+        gasPrice: '0x9184e72a000'
+        value: '0x9184e72a'
+        data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
       - latest
       id: 1
     type: object
@@ -1634,9 +2305,15 @@ definitions:
   estimateGasRequest:
     title: estimateGasRequest
     example:
-      jsonrpc: 2.0
-      method: eth_estimateGas
-      params: []
+      jsonrpc: '2.0'
+      method: 'eth_estimateGas'
+      params: 
+      - from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155'
+        to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+        gas: '0x76c0'
+        gasPrice: '0x9184e72a000'
+        value: '0x9184e72a'
+        data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
       id: 1
     type: object
     properties:
@@ -1659,10 +2336,10 @@ definitions:
   getBlockByHashRequest:
     title: getBlockByHashRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getBlockByHash
+      jsonrpc: '2.0'
+      method: 'eth_getBlockByHash'
       params:
-      - 0xad1328d13f833b8af722117afdc406a762033321df8e48c00cd372d462f48169
+      - '0x9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624'
       - true
       id: 1
     type: object
@@ -1686,10 +2363,10 @@ definitions:
   getBlockByNumberRequest:
     title: getBlockByNumberRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getBlockByNumber
+      jsonrpc: '2.0'
+      method: 'eth_getBlockByNumber'
       params:
-      - 0x1b4
+      - '0x0'
       - true
       id: 1
     type: object
@@ -1713,10 +2390,10 @@ definitions:
   getTransactionByHashRequest:
     title: getTransactionByHashRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getTransactionByHash
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionByHash'
       params:
-      - 0xb2fea9c4b24775af6990237aa90228e5e092c56bdaee74496992a53c208da1ee
+      - '0x9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624'
       id: 1
     type: object
     properties:
@@ -1739,11 +2416,11 @@ definitions:
   getTransactionByBlockHashAndIndexRequest:
     title: getTransactionByBlockHashAndIndexRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getTransactionByBlockHashAndIndex
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionByBlockHashAndIndex'
       params:
-      - 0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7
-      - 0x0
+      - '0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7'
+      - '0x0'
       id: 1
     type: object
     properties:
@@ -1766,11 +2443,11 @@ definitions:
   getTransactionByBlockNumberAndIndexRequest:
     title: getTransactionByBlockNumberAndIndexRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getTransactionByBlockNumberAndIndex
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionByBlockNumberAndIndex'
       params:
-      - 0x52A96E
-      - 0x1
+      - '0x52A96E'
+      - '0x1'
       id: 1
     type: object
     properties:
@@ -1793,10 +2470,10 @@ definitions:
   getTransactionReceiptRequest:
     title: getTransactionReceiptRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getTransactionReceipt
+      jsonrpc: '2.0'
+      method: 'eth_getTransactionReceipt'
       params:
-      - 0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f
+      - '0xa3ece39ae137617669c6933b7578b94e705e765683f260fcfe30eaa41932610f'
       id: 1
     type: object
     properties:
@@ -1819,11 +2496,11 @@ definitions:
   getUncleByBlockHashAndIndexRequest:
     title: getUncleByBlockHashAndIndexRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getUncleByBlockHashAndIndex
+      jsonrpc: '2.0'
+      method: 'eth_getUncleByBlockHashAndIndex'
       params:
-      - 0x7cea0c9ae53df7073fcd4e7b19fc3f1905a2540bbdbd9a10796c9296f5af55dc
-      - 0x0
+      - '0x7cea0c9ae53df7073fcd4e7b19fc3f1905a2540bbdbd9a10796c9296f5af55dc'
+      - '0x0'
       id: 1
     type: object
     properties:
@@ -1846,11 +2523,11 @@ definitions:
   getUncleByBlockNumberAndIndexRequest:
     title: getUncleByBlockNumberAndIndexRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getUncleByBlockNumberAndIndex
+      jsonrpc: '2.0'
+      method: 'eth_getUncleByBlockNumberAndIndex'
       params:
-      - 0x29c
-      - 0x0
+      - '0x29c'
+      - '0x0'
       id: 1
     type: object
     properties:
@@ -1873,8 +2550,8 @@ definitions:
   getCompilersRequest:
     title: getCompilersRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getCompilers
+      jsonrpc: '2.0'
+      method: 'eth_getCompilers'
       params: []
       id: 1
     type: object
@@ -1898,8 +2575,8 @@ definitions:
   compileLLLRequest:
     title: compileLLLRequest
     example:
-      jsonrpc: 2.0
-      method: eth_compileLLL
+      jsonrpc: '2.0'
+      method: 'eth_compileLLL'
       params:
       - (returnlll (suicide (caller)))
       id: 1
@@ -1924,8 +2601,8 @@ definitions:
   compileSolidityRequest:
     title: compileSolidityRequest
     example:
-      jsonrpc: 2.0
-      method: eth_compileSolidity
+      jsonrpc: '2.0'
+      method: 'eth_compileSolidity'
       params:
       - contract test { function multiply(uint a) returns(uint d) {   return a * 7;   } }
       id: 1
@@ -1950,8 +2627,8 @@ definitions:
   compileSerpentRequest:
     title: compileSerpentRequest
     example:
-      jsonrpc: 2.0
-      method: eth_compileSerpent
+      jsonrpc: '2.0'
+      method: 'eth_compileSerpent'
       params:
       - /* some serpent */
       id: 1
@@ -1976,11 +2653,11 @@ definitions:
   newFilterRequest:
     title: newFilterRequest
     example:
-      jsonrpc: 2.0
-      method: eth_newFilter
+      jsonrpc: '2.0'
+      method: 'eth_newFilter'
       params:
       - topics:
-        - 0x12341234
+        - '0x12341234'
       id: 73
     type: object
     properties:
@@ -2004,7 +2681,7 @@ definitions:
     title: Param2
     example:
       topics:
-      - 0x12341234
+      - '0x12341234'
     type: object
     properties:
       topics:
@@ -2016,8 +2693,8 @@ definitions:
   newBlockFilterRequest:
     title: newBlockFilterRequest
     example:
-      jsonrpc: 2.0
-      method: eth_newBlockFilter
+      jsonrpc: '2.0'
+      method: 'eth_newBlockFilter'
       params: []
       id: 73
     type: object
@@ -2041,8 +2718,8 @@ definitions:
   newPendingTransactionFilterRequest:
     title: newPendingTransactionFilterRequest
     example:
-      jsonrpc: 2.0
-      method: eth_newPendingTransactionFilter
+      jsonrpc: '2.0'
+      method: 'eth_newPendingTransactionFilter'
       params: []
       id: 73
     type: object
@@ -2066,8 +2743,8 @@ definitions:
   uninstallFilterRequest:
     title: uninstallFilterRequest
     example:
-      jsonrpc: 2.0
-      method: eth_uninstallFilter
+      jsonrpc: '2.0'
+      method: 'eth_uninstallFilter'
       params:
       - 0xb
       id: 73
@@ -2092,8 +2769,8 @@ definitions:
   getFilterChangesRequest:
     title: getFilterChangesRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getFilterChanges
+      jsonrpc: '2.0'
+      method: 'eth_getFilterChanges'
       params:
       - 0x16
       id: 73
@@ -2118,8 +2795,8 @@ definitions:
   getLogsRequest:
     title: getLogsRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getLogs
+      jsonrpc: '2.0'
+      method: 'eth_getLogs'
       params:
       - topics:
         - 0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b
@@ -2145,8 +2822,8 @@ definitions:
   getWorkRequest:
     title: getWorkRequest
     example:
-      jsonrpc: 2.0
-      method: eth_getWork
+      jsonrpc: '2.0'
+      method: 'eth_getWork'
       params: []
       id: 73
     type: object
@@ -2170,12 +2847,12 @@ definitions:
   submitWorkRequest:
     title: submitWorkRequest
     example:
-      jsonrpc: 2.0
-      method: eth_submitWork
+      jsonrpc: '2.0'
+      method: 'eth_submitWork'
       params:
-      - 0x0000000000000001
-      - 0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
-      - 0xD1GE5700000000000000000000000000D1GE5700000000000000000000000000
+      - '0x0000000000000001'
+      - '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'
+      - '0xD1GE5700000000000000000000000000D1GE5700000000000000000000000000'
       id: 73
     type: object
     properties:
@@ -2198,11 +2875,11 @@ definitions:
   submitHashrateRequest:
     title: submitHashrateRequest
     example:
-      jsonrpc: 2.0
-      method: eth_submitHashrate
+      jsonrpc: '2.0'
+      method: 'eth_submitHashrate'
       params:
-      - 0x0000000000000000000000000000000000000000000000000000000000500000
-      - 0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c
+      - '0x0000000000000000000000000000000000000000000000000000000000500000'
+      - '0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c'
       id: 73
     type: object
     properties:
@@ -2225,12 +2902,12 @@ definitions:
   putStringRequest:
     title: putStringRequest
     example:
-      jsonrpc: 2.0
-      method: db_putString
+      jsonrpc: '2.0'
+      method: 'db_putString'
       params:
-      - testDB
-      - myKey
-      - myString
+      - 'testDB'
+      - 'myKey'
+      - 'myString'
       id: 73
     type: object
     properties:
@@ -2253,11 +2930,11 @@ definitions:
   getStringRequest:
     title: getStringRequest
     example:
-      jsonrpc: 2.0
-      method: db_getString
+      jsonrpc: '2.0'
+      method: 'db_getString'
       params:
-      - testDB
-      - myKey
+      - 'testDB'
+      - 'myKey'
       id: 73
     type: object
     properties:
@@ -2280,12 +2957,12 @@ definitions:
   putHexRequest:
     title: putHexRequest
     example:
-      jsonrpc: 2.0
-      method: db_putHex
+      jsonrpc: '2.0'
+      method: 'db_putHex'
       params:
-      - testDB
-      - myKey
-      - 0x68656c6c6f20776f726c64
+      - 'testDB'
+      - 'myKey'
+      - '0x68656c6c6f20776f726c64'
       id: 73
     type: object
     properties:
@@ -2308,11 +2985,11 @@ definitions:
   getHexRequest:
     title: getHexRequest
     example:
-      jsonrpc: 2.0
-      method: db_getHex
+      jsonrpc: '2.0'
+      method: 'db_getHex'
       params:
-      - testDB
-      - myKey
+      - 'testDB'
+      - 'myKey'
       id: 73
     type: object
     properties:
@@ -2335,13 +3012,13 @@ definitions:
   postrequest:
     title: postrequest
     example:
-      jsonrpc: 2.0
-      method: shh_post
+      jsonrpc: '2.0'
+      method: 'shh_post'
       params:
-      - from: 0xc931d93e97ab07fe42d923478ba2465f2..
+      - from: '0xc931d93e97ab07fe42d923478ba2465f2'
         topics:
-        - 0x68656c6c6f20776f726c64
-        payload: 0x68656c6c6f20776f726c64
+        - '0x68656c6c6f20776f726c64'
+        payload: '0x68656c6c6f20776f726c64'
         ttl: 100
         priority: 100
       id: 73
@@ -2366,10 +3043,10 @@ definitions:
   Param4:
     title: Param4
     example:
-      from: 0xc931d93e97ab07fe42d923478ba2465f2..
+      from: '0xc931d93e97ab07fe42d923478ba2465f2'
       topics:
-      - 0x68656c6c6f20776f726c64
-      payload: 0x68656c6c6f20776f726c64
+      - '0x68656c6c6f20776f726c64'
+      payload: '0x68656c6c6f20776f726c64'
       ttl: 100
       priority: 100
     type: object
@@ -2397,8 +3074,8 @@ definitions:
   newIdentityRequest:
     title: newIdentityRequest
     example:
-      jsonrpc: 2.0
-      method: shh_newIdentity
+      jsonrpc: '2.0'
+      method: 'shh_newIdentity'
       params: []
       id: 73
     type: object
@@ -2422,10 +3099,10 @@ definitions:
   hasIdentityRequest:
     title: hasIdentityRequest
     example:
-      jsonrpc: 2.0
-      method: shh_hasIdentity
+      jsonrpc: '2.0'
+      method: 'shh_hasIdentity'
       params:
-      - 0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1
+      - '0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1'
       id: 73
     type: object
     properties:
@@ -2448,8 +3125,8 @@ definitions:
   newGroupRequest:
     title: newGroupRequest
     example:
-      jsonrpc: 2.0
-      method: shh_newGroup
+      jsonrpc: '2.0'
+      method: 'shh_newGroup'
       params: []
       id: 73
     type: object
@@ -2473,10 +3150,10 @@ definitions:
   addToGroupRequest:
     title: addToGroupRequest
     example:
-      jsonrpc: 2.0
-      method: shh_addToGroup
+      jsonrpc: '2.0'
+      method: 'shh_addToGroup'
       params:
-      - 0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1
+      - '0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1'
       id: 73
     type: object
     properties:
@@ -2499,12 +3176,12 @@ definitions:
   newFilterRequest1:
     title: newFilterRequest1
     example:
-      jsonrpc: 2.0
-      method: shh_newFilter
+      jsonrpc: '2.0'
+      method: 'shh_newFilter'
       params:
       - topics:
-        - 0x12341234bf4b564f
-        to: 0x2341234bf4b2341234bf4b564f...
+        - '0x12341234bf4b564f'
+        to: '0x2341234bf4b2341234bf4b564f...'
       id: 73
     type: object
     properties:
@@ -2528,8 +3205,8 @@ definitions:
     title: Param5
     example:
       topics:
-      - 0x12341234bf4b564f
-      to: 0x2341234bf4b2341234bf4b564f...
+      - '0x12341234bf4b564f'
+      to: '0x2341234bf4b2341234bf4b564f...'
     type: object
     properties:
       topics:
@@ -2544,10 +3221,10 @@ definitions:
   getMessagesRequest:
     title: getMessagesRequest
     example:
-      jsonrpc: 2.0
-      method: shh_getMessages
+      jsonrpc: '2.0'
+      method: 'shh_getMessages'
       params:
-      - 0x7
+      - '0x7'
       id: 73
     type: object
     properties:
