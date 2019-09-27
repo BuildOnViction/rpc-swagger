@@ -465,10 +465,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: Content-Type
-          in: header
-          required: true
-          type: string
         - name: Body
           in: body
           required: true
@@ -514,10 +510,6 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: Content-Type
-          in: header
-          required: true
-          type: string
         - name: Body
           in: body
           required: true
