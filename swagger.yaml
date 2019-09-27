@@ -52,12 +52,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: 'tomo/tomochain05/v1.5.1-stable/linux-amd64/go1.10.8'
         500:
           description: 'Internal Server Error'
   /sha3:
@@ -90,6 +84,8 @@ paths:
 
 
         `DATA` - The SHA3 result of the given string.
+
+
       tags:
       - web3
       operationId: sha3Request
@@ -105,12 +101,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 64
-          #     result: '0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad'
         500:
           description: 'Internal Server Error'
   /version:
@@ -157,12 +147,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 67
-          #     result: '88'
         500:
           description: 'Internal Server Error'
   /listening:
@@ -205,13 +189,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: "2.0"
-          #     method: "net_listening"
-          #     id: 67
-          #     result: true
         500:
           description: 'Internal Server Error'
   /peerCount:
@@ -249,18 +226,13 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     method: 'net_peerCount'
-          #     id: 74
-          #     result: '0x75'
         500:
           description: 'Internal Server Error'
   /protocolVersion:
     post:
       description: >-
+
+
         Returns the current ethereum protocol version.
 
 
@@ -291,17 +263,12 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x3f'
         500:
           description: 'Internal Server Error'
   /syncing:
     post:
       description: >-
+
 
         Returns an object with data about the sync status or false.
 
@@ -339,12 +306,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: 'false'
         500:
           description: 'Internal Server Error'
   /coinbase:
@@ -376,27 +337,27 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 64
-          #     result: '0xad670b2b166684657ffff95f4810380ae7381e9b'
         500:
           description: 'Internal Server Error'
   /hashrate:
     post:
       description: >-
 
+
         Returns the number of hashes per second that the node is mining with.
+
 
         **Parameters**
 
+
         none
+
 
         **Returns**
 
+
         - `QUANTITY` - number of hashes per second.
+
 
       tags:
         - eth
@@ -413,12 +374,6 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 71
-          #     result: '0x0'
         500:
           description: 'Internal Server Error'
   /gasPrice:
@@ -450,12 +405,6 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 73
-          #     result: '0xee6b280'
         500:
           description: 'Internal Server Error'
   /accounts:
@@ -493,12 +442,6 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x1b82c4bf317fcafe3d77e8b444c82715d216afe8'
         500:
           description: 'Internal Server Error'
   /blockNumber:
@@ -534,12 +477,6 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 83
-          #     result: '0xa62efa'
         500:
           description: 'Internal Server Error'
   /getBalance:
@@ -589,12 +526,6 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x30897f6e71126d858861'
         500:
           description: 'Internal Server Error'
   /getStorageAt:
@@ -651,12 +582,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
         500:
           description: 'Internal Server Error'
   /getTransactionCount:
@@ -714,12 +639,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
         500:
           description: 'Internal Server Error'
   /getBlockTransactionCountByHash:
@@ -769,12 +688,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
         500:
           description: 'Internal Server Error'
   /getBlockTransactionCountByNumber:
@@ -821,12 +734,6 @@ paths:
       responses:
         200:
           description: 'Successful Operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
         500:
           description: 'Internal Server Error'
   /getCode:
@@ -878,12 +785,6 @@ paths:
       responses:
         200:
           description: 'Successful operation'
-          # schema:
-          #   type: object
-          #   properties:
-          #     jsonrpc: '2.0'
-          #     id: 1
-          #     result: '0x0000000000000000000000000000000000000000000000000000000000000000'
         500:
           description: 'Internal Server Error'
   /sign:
@@ -893,6 +794,7 @@ paths:
 
         
         The sign method calculates an Ethereum specific signature with: `sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
+        
 
         By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. 
         This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
@@ -904,13 +806,10 @@ paths:
         **Parameters**
 
 
-        - account, message
+          - `DATA`, 20 Bytes - address
 
 
-        - `DATA`, 20 Bytes - address
-
-
-        - `DATA`, N Bytes - message to sign
+          - `DATA`, N Bytes - message to sign
 
 
         **Returns**
@@ -1122,6 +1021,7 @@ paths:
 
 
         **Parameters**
+
 
         See `eth_call` parameters, expect that all properties are optional. If no gas limit is specified geth uses 
         the block gas limit from the pending block as an upper bound. As a result the returned estimate might not be 
@@ -2859,128 +2759,6 @@ definitions:
     - method
     - params
     - id
-  # newIdentityRequest:
-  #   title: newIdentityRequest
-  #   example:
-  #     jsonrpc: '2.0'
-  #     method: 'shh_newIdentity'
-  #     params: []
-  #     id: 73
-  #   type: object
-  #   properties:
-  #     jsonrpc:
-  #       type: string
-  #     method:
-  #       type: string
-  #     params:
-  #       type: array
-  #       items:
-  #         type: string
-  #     id:
-  #       type: integer
-  #       format: int32
-  #   required:
-  #   - jsonrpc
-  #   - method
-  #   - params
-  #   - id
-  # hasIdentityRequest:
-  #   title: hasIdentityRequest
-  #   example:
-  #     jsonrpc: '2.0'
-  #     method: 'shh_hasIdentity'
-  #     params:
-  #     - '0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1'
-  #     id: 73
-  #   type: object
-  #   properties:
-  #     jsonrpc:
-  #       type: string
-  #     method:
-  #       type: string
-  #     params:
-  #       type: array
-  #       items:
-  #         type: string
-  #     id:
-  #       type: integer
-  #       format: int32
-  #   required:
-  #   - jsonrpc
-  #   - method
-  #   - params
-  #   - id
-  # newFilterRequest1:
-  #   title: newFilterRequest1
-  #   example:
-  #     jsonrpc: '2.0'
-  #     method: 'shh_newFilter'
-  #     params:
-  #     - topics:
-  #       - '0x12341234bf4b564f'
-  #       to: '0x2341234bf4b2341234bf4b564f...'
-  #     id: 73
-  #   type: object
-  #   properties:
-  #     jsonrpc:
-  #       type: string
-  #     method:
-  #       type: string
-  #     params:
-  #       type: array
-  #       items:
-  #         $ref: '#/definitions/Param5'
-  #     id:
-  #       type: integer
-  #       format: int32
-  #   required:
-  #   - jsonrpc
-  #   - method
-  #   - params
-  #   - id
-  # Param5:
-  #   title: Param5
-  #   example:
-  #     topics:
-  #     - '0x12341234bf4b564f'
-  #     to: '0x2341234bf4b2341234bf4b564f...'
-  #   type: object
-  #   properties:
-  #     topics:
-  #       type: array
-  #       items:
-  #         type: string
-  #     to:
-  #       type: string
-  #   required:
-  #   - topics
-  #   - to
-  # getMessagesRequest:
-  #   title: getMessagesRequest
-  #   example:
-  #     jsonrpc: '2.0'
-  #     method: 'shh_getMessages'
-  #     params:
-  #     - '0x7'
-  #     id: 73
-  #   type: object
-  #   properties:
-  #     jsonrpc:
-  #       type: string
-  #     method:
-  #       type: string
-  #     params:
-  #       type: array
-  #       items:
-  #         type: string
-  #     id:
-  #       type: integer
-  #       format: int32
-  #   required:
-  #   - jsonrpc
-  #   - method
-  #   - params
-  #   - id
 tags:
 - name: web3
   description: API for web3 request
