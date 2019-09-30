@@ -339,43 +339,6 @@ paths:
           description: 'Successful operation'
         500:
           description: 'Internal Server Error'
-  /hashrate:
-    post:
-      description: >-
-
-
-        Returns the number of hashes per second that the node is mining with.
-
-
-        **Parameters**
-
-
-        none
-
-
-        **Returns**
-
-
-        - `QUANTITY` - number of hashes per second.
-
-
-      tags:
-        - eth
-      operationId: hashrate
-      deprecated: false
-      produces:
-        - application/json
-      parameters:
-        - name: Body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/hashraterequest'
-      responses:
-        200:
-          description: 'Successful operation'
-        500:
-          description: 'Internal Server Error'
   /gasPrice:
     post:
       description: >-
@@ -1955,31 +1918,6 @@ definitions:
       method: 'eth_coinbase'
       params: []
       id: 64
-    type: object
-    properties:
-      jsonrpc:
-        type: string
-      method:
-        type: string
-      params:
-        type: array
-        items:
-          type: string
-      id:
-        type: integer
-        format: int32
-    required:
-    - jsonrpc
-    - method
-    - params
-    - id
-  hashraterequest:
-    title: hashraterequest
-    example:
-      jsonrpc: '2.0'
-      method: 'eth_hashrate'
-      params: []
-      id: 71
     type: object
     properties:
       jsonrpc:
