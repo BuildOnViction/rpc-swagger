@@ -28,3 +28,15 @@ The following options are possible for the defaultBlock parameter:
 ## Curl Examples Explained
 
 The curl options might return a response where the node complains about the content type, this is because the `--data` option sets the content type to `application/x-www-form-urlencoded` . If your node does complain, manually set the header by placing `-H "Content-Type: application/json"` at the start of the call.
+
+## Convert swagger-ui to documents api 
+
+`npm install [-g] widdershins`
+
+Run command:
+
+```
+
+node widdershins --search true --language_tabs 'shell:cURL' 'javascript--nodejs:Node.JS' 'go:GO' 'ruby:Ruby' 'python:Python' --summary swagger.yml -o slate.md
+
+```
