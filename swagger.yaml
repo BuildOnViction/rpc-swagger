@@ -2944,6 +2944,114 @@ definitions:
     - method
     - params
     - id
+  getBestAsk:
+    title: getBestAsk
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getBestAsk'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBidTree:
+    title: getBidTree
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getBidTree'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBids:
+    title: getBids
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getBids'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getBestBid:
+    title: getBestBid
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getBestBid'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
 tags:
 - name: web3
   description: API for web3 request
