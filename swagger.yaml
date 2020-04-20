@@ -2,7 +2,11 @@ swagger: '2.0'
 info:
   version: '1.0.0'
   title: Tomochain JSON-RPC
-  description: A collection holding all the Tomochain JSON​ RPC API calls
+  description: >-
+    A collection holding all the Tomochain JSON-RPC API calls
+
+    [Swagger Docs](https://tomochain.github.io/rpc-swagger/)
+
   contact: {}
 host: rpc.tomochain.com
 basePath: /
