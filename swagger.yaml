@@ -1444,8 +1444,9 @@ paths:
 
               - `latest`: get the status of candidate at the current time
 
-          ```
+        **Example**
 
+          ```
           params: [
             '0x1d50df657b6dce50bac634bf18e2d986d807e940',
             'latest'
@@ -1504,6 +1505,8 @@ paths:
 
         - `DATA`, 32 Bytes - hash of a transaction
 
+
+        **Example**
 
         ```
 
@@ -1572,8 +1575,9 @@ paths:
 
         - `QUANTITY` - integer of the transaction index position.
 
-        ```
+        **Example**
 
+        ```
         params: [
           '0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7',
           '0x0' // 0
@@ -1618,8 +1622,10 @@ paths:
 
           - `QUANTITY` - the transaction index position.
 
-          ```
 
+          **Example**
+
+          ```
           params: [
             '0x29c', // 668
             '0x0' // 0
@@ -1668,8 +1674,9 @@ paths:
         - `DATA`, 32 Bytes - hash of a transaction
 
 
-          ```
+        **Example**
 
+          ```
           params: [
             '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
           ]
@@ -1751,8 +1758,9 @@ paths:
         - `quoteToken`, 32 Bytes - hash of a quote token
 
 
-          ```
+        **Example**
 
+          ```
           params: [
             '0xf992cf45394dAc5f50A26446de17803a79B940da'
             '0x0000000000000000000000000000000000000001'
