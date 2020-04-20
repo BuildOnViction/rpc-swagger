@@ -1686,7 +1686,7 @@ paths:
         **Example**
 
           `params: [
-            '0xf992cf45394dAc5f50A26446de17803a79B940da'
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
             '0x0000000000000000000000000000000000000001'
           ]`
 
@@ -1730,7 +1730,7 @@ paths:
 
 
           `params: [
-            '0xf992cf45394dAc5f50A26446de17803a79B940da'
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
             '0x0000000000000000000000000000000000000001'
           ]`
 
@@ -1752,6 +1752,184 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/getAsks'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBestAsk:
+    post:
+      description: >-
+
+        
+        Returns the best ask
+
+
+        **Parameters**
+
+
+        - `baseToken`, 32 Bytes - hash of a base token
+
+        - `quoteToken`, 32 Bytes - hash of a quote token
+
+
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+
+        **Returns**
+
+
+        `Object` - the best ask (price, volume)
+
+
+      tags:
+        - tomox
+      operationId: getBestAsk
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBestAsk'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBidTree:
+    post:
+      description: >-
+
+        
+        Returns the bid tree (price, orders, amount)
+
+
+        **Parameters**
+
+
+        - `baseToken`, 32 Bytes - hash of a base token
+
+        - `quoteToken`, 32 Bytes - hash of a quote token
+
+
+        **Example**
+
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+
+        **Returns**
+
+
+        `Object` - A bid tree (price, orders, amount)
+
+
+      tags:
+        - tomox
+      operationId: getBidTree
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBidTree'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBids:
+    post:
+      description: >-
+
+        
+        Returns the bids (price, amount)
+
+
+        **Parameters**
+
+
+        - `baseToken`, 32 Bytes - hash of a base token
+
+        - `quoteToken`, 32 Bytes - hash of a quote token
+
+
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+
+        **Returns**
+
+
+        `Object` - A bids (price, amount)
+
+
+      tags:
+        - tomox
+      operationId: getBids
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBids'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBestBid:
+    post:
+      description: >-
+
+        
+        Returns the best ask
+
+
+        **Parameters**
+
+
+        - `baseToken`, 32 Bytes - hash of a base token
+
+        - `quoteToken`, 32 Bytes - hash of a quote token
+
+
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            '0x0000000000000000000000000000000000000001'
+          ]`
+
+        **Returns**
+
+
+        `Object` - the best ask (price, volume)
+
+
+      tags:
+        - tomox
+      operationId: getBestBid
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBestBid'
       responses:
         200:
           description: 'Successful Operation'
