@@ -1734,6 +1734,103 @@ paths:
           description: 'Successful Operation'
         500:
           description: 'Internal Server Error'
+
+  /getAskTree:
+    post:
+      description: >-
+
+        
+        Returns the ask tree (price, orders, amount)
+
+
+        **Parameters**
+
+
+        - `baseToken`, 32 Bytes - hash of a base token
+
+        - `quoteToken`, 32 Bytes - hash of a quote token
+
+
+          ```
+
+          params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da'
+            '0x0000000000000000000000000000000000000001'
+          ]
+
+          ```
+
+        **Returns**
+
+
+        `Object` - A ask tree (price, orders, amount)
+
+
+      tags:
+        - tomox
+      operationId: getAskTree
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getAskTree'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getAsks:
+    post:
+      description: >-
+
+        
+        Returns the asks (price, amount)
+
+
+        **Parameters**
+
+
+        - `baseToken`, 32 Bytes - hash of a base token
+
+        - `quoteToken`, 32 Bytes - hash of a quote token
+
+
+          ```
+
+          params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da'
+            '0x0000000000000000000000000000000000000001'
+          ]
+
+          ```
+
+        **Returns**
+
+
+        `Object` - A asks (price, amount)
+
+
+      tags:
+        - tomox
+      operationId: getAsks
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getAsks'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
 definitions:
   clientVersionRequest:
     title: clientVersionRequest
@@ -2689,6 +2786,60 @@ definitions:
     - method
     - params
     - id
+  getAskTree:
+    title: getAskTree
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getAskTree'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getAsks:
+    title: getAsks
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getAsks'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - '0x0000000000000000000000000000000000000001'
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
 tags:
 - name: web3
   description: API for web3 request
@@ -2696,3 +2847,5 @@ tags:
   description: API for network request
 - name: eth
   description: API for eth information
+- name: tomox
+  description: API for tomox request
