@@ -71,8 +71,8 @@ paths:
 
 
 
-        `params:`
-        `[
+        `params:
+        [
           "0x68656c6c6f20776f726c64"
         ]`
 
@@ -454,12 +454,10 @@ paths:
         - `QUANTITY|TAG` - integer block number, or the string "latest", "earliest" or "pending", see the default block parameter
 
 
-        ```
-        params: [
+        `params: [
            ' 0x2b5634c42055806a59e9107ed44d43c426e58258',
            'latest'
-        ]
-        ```
+        ]`
 
 
         **Returns**
@@ -503,16 +501,10 @@ paths:
 
 
 
-        ```
-
-
-        params: [
+        `params: [
               '0x2b5634c42055806a59e9107ed44d43c426e58258',
               'latest'
-              ]
-        
-        
-        ```
+              ]`
 
         **Returns**
 
@@ -559,16 +551,10 @@ paths:
 
 
 
-          ```
-
-
-          params: [
+          `params: [
             '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
             'latest' // state at the latest block
-          ]
-
-
-          ```
+          ]`
 
 
 
@@ -611,15 +597,9 @@ paths:
         - `DATA`, 32 Bytes - hash of a block
 
 
-        ```
-
-
-        params: [
+        `params: [
           '0xc8b967161c671ce952a3d50987a78d64157fb5a8e1724804b87d3e9b11e3aa34'
-        ]
-
-
-        ```
+        ]`
 
 
         **Returns**
@@ -660,13 +640,10 @@ paths:
         - `QUANTITY|TAG` - integer of a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the default block parameter.
 
 
-        ```
-
-        params: [
+        `params: [
           '0x85', // 232
-        ]
+        ]`
 
-        ```
 
         **Returns**
 
@@ -709,14 +686,10 @@ paths:
         - `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`, see the default block parameter
 
 
-        ```
-
-        params: [
+        `params: [
           '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
           '0x2'  // 2
-        ]
-
-        ```
+        ]`
 
 
         **Returns**
@@ -825,19 +798,14 @@ paths:
           - `nonce`: `QUANTITY` - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
 
 
-        ```
-
-        params: [{
+        `params: [{
           "from": " 0xb60e8dd61c5d32be8058bb8eb970870f07233155",
           "to": " 0xd46e8dd67c5d32be8058bb8eb970870f07244567",
           "gas": "0x76c0", // 30400
           "gasPrice": "0x9184e72a000", // 10000000000000
           "value": "0x9184e72a", // 2441406250
           "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
-        }]
-
-
-        ```
+        }]`
 
         **Returns**
 
@@ -878,11 +846,7 @@ paths:
           - `DATA`, The signed transaction data.
 
 
-          ```
-
-          params: ["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"]
-
-          ```
+          `params: ["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"]`
 
           **Returns**
 
@@ -1022,14 +986,10 @@ paths:
 
           - `Boolean` [required] - If true it returns the full transaction objects, if false only the hashes of the transactions.
 
-          ```
-
-          params: [
+          `params: [
             '0x9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624',
             true
-          ]
-
-          ```
+          ]`
 
 
           **Returns**
@@ -1115,14 +1075,10 @@ paths:
           `FULLTX` [required] - a boolean value specified whether you want to get transactions list or not
 
 
-          ```
-
-          params: [
+          `params: [
             '0x0',
             true
-          ]
-
-          ```
+          ]`
 
 
 
@@ -1173,13 +1129,9 @@ paths:
             - `earliest`: get the genesis block
 
 
-          ```
-
-          params: [
+          `params: [
             '0xA61F98'
-          ]
-
-          ```
+          ]`
 
 
 
@@ -1223,13 +1175,9 @@ paths:
 
 
 
-          ```
-
-          params: [
+          `params: [
             '0x605777ee60ef3ccf21e079fa1b091b0196cf1a2c1dd7c088dd5b1ab03f680b6f'
-          ]
-
-          ```
+          ]`
 
 
 
@@ -1279,13 +1227,9 @@ paths:
 
 
 
-          ```
-
-          params: [
+          `params: [
             '0xA61F98'
-          ]
-
-          ```
+          ]`
 
 
 
@@ -1329,13 +1273,9 @@ paths:
 
 
 
-          ```
-
-          params: [
+          `params: [
             '0x605777ee60ef3ccf21e079fa1b091b0196cf1a2c1dd7c088dd5b1ab03f680b6f'
-          ]
-
-          ```
+          ]`
 
 
 
@@ -1379,13 +1319,9 @@ paths:
 
               - `latest`: get the status of candidate at the current time
 
-          ```
-
-          params: [
+          `params: [
             'latest'
-          ]
-
-          ```
+          ]`
 
         **Returns**
 
@@ -1442,17 +1378,15 @@ paths:
 
           - `EPOCH_NUMBER` [required] - a hex code of an integer representing the `EPOCH_NUMBER` or the following special param:
 
-              - `latest`: get the status of candidate at the current time
+          - `latest`: get the status of candidate at the current time
+
 
         **Example**
 
-          ```
-          params: [
+          `params: [
             '0x1d50df657b6dce50bac634bf18e2d986d807e940',
             'latest'
-          ]
-
-          ```
+          ]`
 
         **Returns**
 
@@ -1508,13 +1442,9 @@ paths:
 
         **Example**
 
-        ```
-
-        params: [
+        `params: [
           "0xd83b26e101dd6480764bade90fc283407919f60b7e65ff83fbf6cdc92f1138a1"
-        ]
-
-        ```
+        ]`
 
         **Returns**
 
@@ -1577,13 +1507,10 @@ paths:
 
         **Example**
 
-        ```
-        params: [
+        `params: [
           '0x3c82bc62179602b67318c013c10f99011037c49cba84e31ffe6e465a21c521a7',
           '0x0' // 0
-        ]
-
-        ```
+        ]`
 
         **Returns**
 
@@ -1625,13 +1552,10 @@ paths:
 
           **Example**
 
-          ```
-          params: [
+          `params: [
             '0x29c', // 668
             '0x0' // 0
-          ]
-
-          ```
+          ]`
 
 
           **Returns**
@@ -1676,12 +1600,9 @@ paths:
 
         **Example**
 
-          ```
-          params: [
+          `params: [
             '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
-          ]
-
-          ```
+          ]`
 
         **Returns**
 
@@ -1760,13 +1681,10 @@ paths:
 
         **Example**
 
-          ```
-          params: [
+          `params: [
             '0xf992cf45394dAc5f50A26446de17803a79B940da'
             '0x0000000000000000000000000000000000000001'
-          ]
-
-          ```
+          ]`
 
         **Returns**
 
@@ -1807,14 +1725,10 @@ paths:
         - `quoteToken`, 32 Bytes - hash of a quote token
 
 
-          ```
-
-          params: [
+          `params: [
             '0xf992cf45394dAc5f50A26446de17803a79B940da'
             '0x0000000000000000000000000000000000000001'
-          ]
-
-          ```
+          ]`
 
         **Returns**
 
