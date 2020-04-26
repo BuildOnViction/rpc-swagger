@@ -1768,9 +1768,9 @@ paths:
         **Parameters**
 
 
-        - `baseToken`, 32 Bytes - hash of a base token
+        - `baseToken`, hash of a base token
 
-        - `quoteToken`, 32 Bytes - hash of a quote token
+        - `quoteToken`, hash of a quote token
 
 
           `params: [
@@ -1812,9 +1812,9 @@ paths:
         **Parameters**
 
 
-        - `baseToken`, 32 Bytes - hash of a base token
+        - `baseToken`, hash of a base token
 
-        - `quoteToken`, 32 Bytes - hash of a quote token
+        - `quoteToken`, hash of a quote token
 
 
         **Example**
@@ -1858,9 +1858,9 @@ paths:
         **Parameters**
 
 
-        - `baseToken`, 32 Bytes - hash of a base token
+        - `baseToken`, hash of a base token
 
-        - `quoteToken`, 32 Bytes - hash of a quote token
+        - `quoteToken`, hash of a quote token
 
 
           `params: [
@@ -1902,9 +1902,9 @@ paths:
         **Parameters**
 
 
-        - `baseToken`, 32 Bytes - hash of a base token
+        - `baseToken`, hash of a base token
 
-        - `quoteToken`, 32 Bytes - hash of a quote token
+        - `quoteToken`, hash of a quote token
 
 
           `params: [
@@ -1930,6 +1930,122 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/getBestBid'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getBorrows:
+    post:
+      description: >-
+
+        
+        Returns the borrows (interest, amount)
+
+
+        **Parameters**
+
+
+        - `lendingToken`, hash of a lending token
+
+        - `term`, perior of the loan (seconds)
+
+
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            86400
+          ]`
+
+        **Returns**
+
+
+        `Object` - list borrows (interest, amount)
+
+      tags:
+        - tomox
+      operationId: getBorrows
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getBorrows'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getInvest:
+    post:
+      description: >-
+
+        
+        Returns the invests (interest, amount)
+
+
+        **Parameters**
+
+
+        - `lendingToken`, hash of a lending token
+
+        - `term`, perior of the loan (seconds)
+
+
+          `params: [
+            '0xf992cf45394dAc5f50A26446de17803a79B940da',
+            86400
+          ]`
+
+        **Returns**
+
+
+        `Object` - list invests (interest, amount)
+
+      tags:
+        - tomox
+      operationId: getInvests
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getInvests'
+      responses:
+        200:
+          description: 'Successful Operation'
+        500:
+          description: 'Internal Server Error'
+  /getNetworkInformation:
+    post:
+      description: >-
+
+        
+        Returns the network information (chainId, special contracts)
+
+
+        **Returns**
+
+
+        `Object` - network information
+
+      tags:
+        - posv
+      operationId: getNetworkInformation
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/getNetworkInformation'
       responses:
         200:
           description: 'Successful Operation'
@@ -3052,6 +3168,85 @@ definitions:
     - method
     - params
     - id
+  getBorrows:
+    title: getBorrows
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getBorrows'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - 86400
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getInvests:
+    title: getInvest
+    example:
+      jsonrpc: '2.0'
+      method: 'tomox_getInvests'
+      params:
+      - '0xf992cf45394dAc5f50A26446de17803a79B940da'
+      - 86400
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
+  getNetworkInformation:
+    title: getNetworkInformation
+    example:
+      jsonrpc: '2.0'
+      method: 'posv_getNetworkInformation'
+      params: []
+      id: 1
+    type: object
+    properties:
+      jsonrpc:
+        type: string
+      method:
+        type: string
+      params:
+        type: array
+        items:
+          type: string
+      id:
+        type: integer
+        format: int32
+    required:
+    - jsonrpc
+    - method
+    - params
+    - id
 tags:
 - name: web3
   description: API for web3 request
@@ -3061,3 +3256,5 @@ tags:
   description: API for eth information
 - name: tomox
   description: API for tomox request
+- name: posv
+  description: API for posv request
