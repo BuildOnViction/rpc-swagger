@@ -1,4 +1,4 @@
-# TOMOCHAIN JSON RPC API
+# VICTION JSON RPC API
 
 JSON is a lightweight data-interchange format. It can represent numbers, strings, ordered sequences of values, and collections of name/value pairs.
 

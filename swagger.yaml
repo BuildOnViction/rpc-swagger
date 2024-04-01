@@ -1,14 +1,14 @@
 swagger: '2.0'
 info:
   version: '1.0.0'
-  title: Tomochain JSON-RPC
+  title: Viction JSON-RPC
   description: >-
-    A collection holding all the Tomochain JSON-RPC API calls
+    A collection holding all the Viction JSON-RPC API calls
 
-    [Swagger Docs](https://tomochain.github.io/rpc-swagger/)
+    [Swagger Docs](https://viction.github.io/rpc-swagger/)
 
   contact: {}
-host: rpc.tomochain.com
+host: rpc.viction.com
 basePath: /
 schemes:
 - https
@@ -132,9 +132,9 @@ paths:
 
         - `String` - The current network id.
 
-          - `"88"`: Tomochain Mainnet
+          - `"88"`: Viction Mainnet
 
-          - `"89"`: Tomochain Testnet
+          - `"89"`: Viction Testnet
 
       tags:
       - net
