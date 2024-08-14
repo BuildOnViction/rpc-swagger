@@ -5,10 +5,10 @@ info:
   description: >-
     A collection holding all the Viction JSON-RPC API calls
 
-    [Swagger Docs](https://viction.github.io/rpc-swagger/)
+    [Swagger Docs](https://buildonviction.github.io/rpc-swagger/)
 
   contact: {}
-host: rpc.viction.com
+host: rpc.viction.xyz
 basePath: /
 schemes:
 - https
